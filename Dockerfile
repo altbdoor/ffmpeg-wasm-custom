@@ -151,8 +151,16 @@ COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
 FROM ffmpeg-base AS ffmpeg-builder
 COPY build/ffmpeg.sh /src/build.sh
 RUN bash -x /src/build.sh \
+      --disable-everything \
       --enable-gpl \
-      --enable-libx264
+      --enable-libx264 \
+      --enable-encoder=libx264 \
+      --enable-decoder=h264 \
+      --enable-parser=h264 \
+      --enable-demuxer=mov \
+      --enable-muxer=mp4 \
+      --enable-protocol=file \
+      --enable-bsf=h264_mp4toannexb
 # RUN bash -x /src/build.sh \
 #       --enable-gpl \
 #       --enable-libx264 \
