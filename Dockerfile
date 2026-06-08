@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 # Build x264
 FROM emsdk-base AS x264-builder
-ADD override/x264-b35605ac.zip /tmp
+ADD override/x264-b35605ac.tar.gz /tmp
 RUN mv /tmp/x264-stable/* /src/ && rmdir /tmp/x264-stable
 # ENV X264_BRANCH=4-cores
 # ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
