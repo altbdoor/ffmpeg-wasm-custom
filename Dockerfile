@@ -22,9 +22,18 @@ RUN apt-get update && \
 
 # Build x264
 FROM emsdk-base AS x264-builder
-ENV X264_BRANCH=4-cores
-ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
+ENV X264_BRANCH=b35605ace3ddf7c1a5d67a2eb553f034aef41d55
+ADD https://code.videolan.org/videolan/x264.git#$X264_BRANCH /src
+# ENV X264_BRANCH=4-cores
+# ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
 COPY build/x264.sh /src/build.sh
+
+# https://github.com/ffmpegwasm/x264/commit/33cac6b77d5b9259c552156013a817ab23119612
+RUN tac /src/common/cpu.c \
+    | sed '0,/return 1;/{s|return 1;|return 4;|}' \
+    | tac > /tmp/rev-cpu.c \
+    && mv /tmp/rev-cpu.c /src/common/cpu.c
+
 RUN bash -x /src/build.sh
 
 # # Build x265
