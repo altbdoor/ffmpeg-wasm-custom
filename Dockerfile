@@ -22,8 +22,8 @@ RUN apt-get update && \
 
 # Build x264
 FROM emsdk-base AS x264-builder
-ENV X264_BRANCH=b35605ace3ddf7c1a5d67a2eb553f034aef41d55
-ADD https://code.videolan.org/videolan/x264.git#$X264_BRANCH /src
+ADD override/x264-b35605ac.zip /tmp
+RUN mv /tmp/x264-stable/* /src/ && rmdir /tmp/x264-stable
 # ENV X264_BRANCH=4-cores
 # ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
 COPY build/x264.sh /src/build.sh
