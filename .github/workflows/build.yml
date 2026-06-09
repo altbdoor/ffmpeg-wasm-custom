@@ -32,17 +32,17 @@ jobs:
         uses: actions/cache@v5
         with:
           path: build-cache-st
-          key: build-cache-st-v1-${{ hashFiles('Dockerfile', 'Makefile', 'build/*', 'override/*') }}
+          key: build-cache-st-v1-${{ hashFiles('Dockerfile', 'Makefile', 'build/*', 'override/src/*') }}
           restore-keys: |
             build-cache-st-v1-
 
       - name: Build FFmpeg
         run: |
-          cp override/Dockerfile Dockerfile
+          cp override/src/Dockerfile Dockerfile
           make prd EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
 
       - run: |
-          ls -lR packages/core/dist/
+          ls -lRh packages/core/dist/
 
       - name: Upload core
         uses: actions/upload-artifact@v7

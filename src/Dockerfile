@@ -8,7 +8,7 @@ ARG FFMPEG_ST
 ARG FFMPEG_MT
 ENV INSTALL_DIR=/opt
 # We cannot upgrade to n6.0 as ffmpeg bin only supports multithread at the moment.
-ENV FFMPEG_VERSION=n7.1.4
+ENV FFMPEG_VERSION=n5.1.9
 ENV CFLAGS="-I$INSTALL_DIR/include $CFLAGS $EXTRA_CFLAGS"
 ENV CXXFLAGS="$CFLAGS"
 ENV LDFLAGS="-L$INSTALL_DIR/lib $LDFLAGS $CFLAGS $EXTRA_LDFLAGS"
@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 # Build x264
 FROM emsdk-base AS x264-builder
-ADD override/x264-b35605ac.tar.gz /tmp
+ADD override/src/x264-b35605ac.tar.gz /tmp
 RUN mv /tmp/x264-stable/* /src/ && rm -rf /tmp/x264-stable
 # ENV X264_BRANCH=4-cores
 # ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
@@ -191,7 +191,8 @@ RUN bash -x /src/build.sh \
 FROM ffmpeg-builder AS ffmpeg-wasm-builder
 COPY src/bind /src/src/bind
 COPY src/fftools /src/src/fftools
-COPY build/ffmpeg-wasm.sh build.sh
+COPY override/src/ffmpeg-wasm.sh build.sh
+# COPY build/ffmpeg-wasm.sh build.sh
 # libraries to link
 ENV FFMPEG_LIBS \
       -lx264
