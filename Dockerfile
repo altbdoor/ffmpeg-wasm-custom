@@ -18,7 +18,7 @@ ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$EM_PKG_CONFIG_PATH
 ENV FFMPEG_ST=$FFMPEG_ST
 ENV FFMPEG_MT=$FFMPEG_MT
 RUN apt-get update && \
-      apt-get install -y pkg-config autoconf automake libtool ragel
+      apt-get install -y --no-install-recommends pkg-config autoconf automake libtool ragel
 
 # Build x264
 FROM emsdk-base AS x264-builder
@@ -136,7 +136,7 @@ RUN bash -x /src/build.sh
 # # Build zimg
 # FROM emsdk-base AS zimg-builder
 # ENV ZIMG_BRANCH=release-3.0.5
-# RUN apt-get update && apt-get install -y git
+# RUN apt-get update && apt-get install -y --no-install-recommends git
 # RUN git clone --recursive -b $ZIMG_BRANCH https://github.com/sekrit-twc/zimg.git /src
 # COPY build/zimg.sh /src/build.sh
 # RUN bash -x /src/build.sh
