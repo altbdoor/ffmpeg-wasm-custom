@@ -169,7 +169,9 @@ RUN bash -x /src/build.sh \
       --enable-demuxer=mov \
       --enable-muxer=mp4 \
       --enable-protocol=file \
-      --enable-bsf=h264_mp4toannexb
+      --enable-protocol=pipe \
+      --enable-bsf=h264_mp4toannexb \
+      --enable-filter=buffer,abuffer,buffersink,abuffersink,format,scale,trim,atrim,null
 # RUN bash -x /src/build.sh \
 #       --enable-gpl \
 #       --enable-libx264 \
