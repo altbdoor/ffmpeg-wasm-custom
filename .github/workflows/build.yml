@@ -3,6 +3,7 @@ name: ffmpeg-wasm build
 on:
   push:
     branches: [master]
+    # tags: ['v*']
   workflow_dispatch: {}
 
 jobs:
@@ -48,3 +49,10 @@ jobs:
         with:
           name: ffmpeg-core
           path: packages/core/dist/*
+
+      # - name: Release
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   uses: softprops/action-gh-release@v3
+      #   with:
+      #     files: packages/core/dist/*
+      #     generate_release_notes: true
