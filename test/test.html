@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <pre><code id="log"></code></pre>
+
+    <script src="./ffmpeg/ffmpeg.js"></script>
+    <script type="module">
+      const { FFmpeg } = FFmpegWASM;
+      const ffmpeg = new FFmpeg();
+      const logElem = document.getElementById("log");
+
+      let logs = [];
+      ffmpeg.on("log", ({ message }) => logs.push(message));
+
+      const main = async () => {
+        await ffmpeg.load({
+          coreURL: `/dist/ffmpeg-core.js`,
+          wasmURL: `/dist/ffmpeg-core.wasm`,
+        });
+
+        const cmds = [
+          "-version",
+          "-encoders",
+          "-decoders",
+          "-filters",
+          "-protocols",
+          "-muxers",
+          "-demuxers",
+          "-bsfs",
+        ];
+
+        for (const cmd of cmds) {
+          logs = ["=".repeat(100), `ffmpeg -hide_banner ${cmd}`, "=".repeat(100)];
+          await ffmpeg.exec(["-hide_banner", cmd]);
+          logElem.textContent +=
+            logs
+              .filter((l) => l !== "Aborted()")
+              .join("\n")
+              .trim() + "\n\n";
+        }
+
+        logElem.textContent += "===END===";
+      };
+      main();
+    </script>
+  </body>
+</html>
