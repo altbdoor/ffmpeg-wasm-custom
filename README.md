@@ -5,8 +5,12 @@ Just personal build of <https://github.com/ffmpegwasm/ffmpeg.wasm>, based on v12
 ### Changes (in no particular order)
 
 - Copied over [original Dockerfile](https://github.com/ffmpegwasm/ffmpeg.wasm/blob/v12.15/Dockerfile) from FFmpeg WASM
-- Upgraded `emscripten/emsdk` and FFmpeg to the latest patch
+- Upgraded `emscripten/emsdk@3.1.74` and `FFmpeg/FFmpeg@5.1.9` to the latest patch
 - Disabled everything, and only enabled x264
+  - See [`build-parameters.md`](./build-parameters.md).
+- Use [latest stable x264 from Git repo](https://code.videolan.org/videolan/x264/-/tree/stable?ref_type=heads)
+  - The repo is protected with [Anubis](https://anubis.techaro.lol/), so `curl` and `git` commands do not work
+  - As of 8 June 2026, the code snapshot is downloaded as `x264-b35605ac.tar.gz`
 
 ### References
 

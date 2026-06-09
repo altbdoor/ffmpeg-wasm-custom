@@ -40,6 +40,9 @@ jobs:
           cp override/Dockerfile Dockerfile
           make prd EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
 
+      - run: |
+          ls -lR packages/core/dist/
+
       - name: Upload core
         uses: actions/upload-artifact@v7
         with:

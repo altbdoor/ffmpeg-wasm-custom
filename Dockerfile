@@ -170,8 +170,7 @@ RUN bash -x /src/build.sh \
       --enable-muxer=mp4 \
       --enable-protocol=file \
       --enable-protocol=pipe \
-      --enable-bsf=h264_mp4toannexb \
-      --enable-filter=buffer,abuffer,buffersink,abuffersink,format,scale,trim,atrim,null
+      --enable-filter=buffer,buffersink,format,scale,trim,null
 # RUN bash -x /src/build.sh \
 #       --enable-gpl \
 #       --enable-libx264 \
