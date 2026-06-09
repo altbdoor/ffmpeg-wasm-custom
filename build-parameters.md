@@ -27,14 +27,3 @@
 | `trim`                         | trim video by duration/start time                                     | `-t 10`, `-ss 5`      |
 | `null`                         | internal passthrough                                                  | -                     |
 | `transpose,hflip,vflip,rotate` | transpose for 90/270, hflip+vflip for 180, rotate for arbitrary angle | default `-autorotate` |
-
-## Removed libraries
-
-| Library          | Reason                             |
-| ---------------- | ---------------------------------- |
-| `-Llibavdevice`  | no device I/O needed               |
-| `-Llibpostproc`  | deprecated, not used               |
-| `-Llibswresample`| audio only                         |
-| `-lavdevice`     | no device I/O needed               |
-| `-lpostproc`     | deprecated, not used               |
-| `-lswresample`   | audio only                         |
