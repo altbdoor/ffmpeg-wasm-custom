@@ -1,2 +1,4 @@
 ffmpeg/
 dist/
+node_modules/
+log.txt
