@@ -26,8 +26,7 @@ ADD override/src/x264-b35605ac.tar.gz /tmp
 RUN mv /tmp/x264-stable/* /src/ && rm -rf /tmp/x264-stable
 # ENV X264_BRANCH=4-cores
 # ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
-# COPY build/x264.sh /src/build.sh
-COPY override/src/build/x264.sh /src/build.sh
+COPY build/x264.sh /src/build.sh
 
 # https://github.com/ffmpegwasm/x264/commit/33cac6b77d5b9259c552156013a817ab23119612
 RUN tac /src/common/cpu.c \
@@ -193,7 +192,8 @@ RUN bash -x /src/build.sh \
 FROM ffmpeg-builder AS ffmpeg-wasm-builder
 COPY src/bind /src/src/bind
 COPY src/fftools /src/src/fftools
-COPY build/ffmpeg-wasm.sh build.sh
+# COPY build/ffmpeg-wasm.sh build.sh
+COPY override/src/build/ffmpeg-wasm.sh build.sh
 # libraries to link
 ENV FFMPEG_LIBS \
       -lx264
