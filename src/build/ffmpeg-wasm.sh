@@ -39,6 +39,7 @@ CONF_FLAGS=(
   -Oz                            # optimize for size
   -sASSERTIONS=0                 # remove assertions
   -sDISABLE_EXCEPTION_CATCHING=1 # remove exception handling
+  -sMALLOC=emmalloc              # use minimal malloc instead of dlmalloc
   # ==== custom optimizations ====
 
   ${FFMPEG_MT:+ -sINITIAL_MEMORY=1024MB}   # ALLOW_MEMORY_GROWTH is not recommended when using threads, thus we use a large initial memory
