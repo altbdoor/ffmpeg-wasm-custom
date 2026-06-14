@@ -4,6 +4,7 @@
 
 | Flag                       | Purpose                                         |
 | -------------------------- | ----------------------------------------------- |
+| `--enable-small`           | optimize ffmpeg for size instead of speed       |
 | `--disable-everything`     | disable everything                              |
 | `--enable-gpl`             | allow GPL-licensed libs (libx264)               |
 | `--enable-libx264`         | use external libx264 instead of native h264     |
@@ -27,3 +28,12 @@
 | `trim`                         | trim video by duration/start time                                     | `-t 10`, `-ss 5`      |
 | `null`                         | internal passthrough                                                  | -                     |
 | `transpose,hflip,vflip,rotate` | transpose for 90/270, hflip+vflip for 180, rotate for arbitrary angle | default `-autorotate` |
+
+## `emcc` flags
+
+| Flag                             | Purpose                                         |
+| -------------------------------- | ----------------------------------------------- |
+| `-Oz`                            | aggressive size optimization from emscripten    |
+| `-sASSERTIONS=0`                 | remove runtime assertions                       |
+| `-sDISABLE_EXCEPTION_CATCHING=1` | remove C++ exception handling overhead          |
+| `-sMALLOC=emmalloc`              | minimal malloc (~10 KB over dlmalloc, not used) |
