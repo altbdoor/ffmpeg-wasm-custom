@@ -28,7 +28,7 @@ if (!existsSync(ffmpegDir)) {
     const jsPath = join(ffmpegDir, jsFile);
 
     if (existsSync(jsPath)) {
-      return;
+      continue;
     }
 
     const res = await fetch(`${base}/dist/umd/${jsFile}`);
