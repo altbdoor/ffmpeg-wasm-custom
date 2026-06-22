@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: ffmpegwasm/ffmpeg.wasm
           ref: v12.15
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           path: override
 
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/download-artifact@v8
         with:
@@ -84,3 +84,4 @@ jobs:
           name: ffmpeg-log
           path: test/log.txt
           retention-days: 7
+          archive: false
