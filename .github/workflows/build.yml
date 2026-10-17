@@ -25,7 +25,7 @@ jobs:
 
       - name: Setup Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v4.1.0
+        uses: docker/setup-buildx-action@v4
 
       - name: Cache build
         id: cache-build
@@ -70,7 +70,7 @@ jobs:
       - run: |
           npm ci
           CHROMIUM_BIN=$(which microsoft-edge) node test.mjs
-          cat test/log.txt
+          cat log.txt
         working-directory: test
 
       - uses: actions/upload-artifact@v7
