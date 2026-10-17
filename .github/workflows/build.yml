@@ -119,21 +119,25 @@ jobs:
           package-manager-cache: false
 
       - run: |
-          version="${GITHUB_REF_NAME#v}"
           cp src/publish-package.json packages/core/package.json
+          cp README.md packages/core/README.md
+
           cd packages/core
+          version="${GITHUB_REF_NAME#v}"
           npm version "$version" --no-git-tag-version
 
-      - run: npm publish
+      - id: pack
+        run: |
+          tarball="$(npm pack)"
+          echo "tarball=$tarball" >> "$GITHUB_OUTPUT"
+          npm publish "$tarball"
         working-directory: packages/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
-          tar czf ffmpeg-core.tgz --directory packages/core dist
-
           gh release create "$GITHUB_REF_NAME" \
-            ffmpeg-core.tgz test/log.txt \
+            "packages/core/${{ steps.pack.outputs.tarball }}" test/log.txt \
             --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
