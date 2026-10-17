@@ -115,7 +115,8 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: "test/.nvmrc"
-          registry-url: "https://registry.npmjs.org"
+          registry-url: "https://npm.pkg.github.com"
+          package-manager-cache: false
 
       - run: |
           version="${GITHUB_REF_NAME#v}"
@@ -123,7 +124,7 @@ jobs:
           cd packages/core
           npm version "$version" --no-git-tag-version
 
-      - run: npm publish --provenance
+      - run: npm publish
         working-directory: packages/core
 
       - run: |
