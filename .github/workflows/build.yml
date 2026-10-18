@@ -144,7 +144,7 @@ jobs:
 
   publish-branch:
     needs: test
-    if: startsWith(github.ref, 'refs/tags/')
+    # if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-slim
     permissions:
       contents: write
@@ -161,7 +161,7 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
           git checkout --orphan release-latest
-          git rm --quiet -r .
+          git rm --quiet --force -r .
           cp --recursive "$RUNNER_TEMP/dist-tmp/." .
           git add --all
           git commit --message "publish $GITHUB_REF_NAME"
