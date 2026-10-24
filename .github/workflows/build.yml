@@ -24,6 +24,11 @@ jobs:
         with:
           path: override
 
+      - name: Override original build
+        run: |
+          cp --verbose override/src/Dockerfile Dockerfile
+          cp --verbose override/src/build/*.sh build/
+
       - name: Update pkg-config database
         run: sudo ldconfig
 
@@ -42,7 +47,6 @@ jobs:
 
       - name: Build FFmpeg
         run: |
-          cp override/src/Dockerfile Dockerfile
           make prd EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
 
       - run: |
@@ -74,7 +78,9 @@ jobs:
       - run: |
           npm ci
           CHROMIUM_BIN=$(which microsoft-edge) node test.mjs
+          echo "::group::logs"
           cat log.txt
+          echo "::endgroup::"
         working-directory: test
 
       - uses: actions/upload-artifact@v7
@@ -172,7 +178,8 @@ jobs:
           branch="release-latest"
           commit=$(git rev-parse HEAD)
 
-          # see https://www.jsdelivr.com/documentation#id-caching
+          echo "# see https://www.jsdelivr.com/documentation#id-caching"
+          echo ""
           echo "esm"
           echo "- jsdelivr branch (12h): https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@${branch}/esm/ffmpeg-core.js"
           echo "- jsdelivr commit (1y): https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@${commit}/esm/ffmpeg-core.js"

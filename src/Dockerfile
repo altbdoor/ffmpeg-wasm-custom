@@ -158,8 +158,7 @@ COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
 
 # Build ffmpeg
 FROM ffmpeg-base AS ffmpeg-builder
-# COPY build/ffmpeg.sh /src/build.sh
-COPY override/src/build/ffmpeg.sh /src/build.sh
+COPY build/ffmpeg.sh /src/build.sh
 RUN bash -x /src/build.sh \
       --disable-everything \
       --enable-gpl \
@@ -192,8 +191,7 @@ RUN bash -x /src/build.sh \
 FROM ffmpeg-builder AS ffmpeg-wasm-builder
 COPY src/bind /src/src/bind
 COPY src/fftools /src/src/fftools
-# COPY build/ffmpeg-wasm.sh build.sh
-COPY override/src/build/ffmpeg-wasm.sh build.sh
+COPY build/ffmpeg-wasm.sh build.sh
 # libraries to link
 ENV FFMPEG_LIBS \
       -lx264

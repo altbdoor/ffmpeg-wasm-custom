@@ -17,7 +17,12 @@
 | `--enable-protocol=pipe`   | read/write stdin/stdout pipes (ffmpeg.wasm I/O) |
 | `--enable-filters=...`     | see below                                       |
 
-## Filters
+## Enabled filters
+
+For all filters, see:
+
+- https://www.ffmpeg.org/ffmpeg-filters.html
+- https://github.com/FFmpeg/FFmpeg/blob/release/5.1/libavfilter/allfilters.c
 
 | Filter                         | Purpose                                                               | Example               |
 | ------------------------------ | --------------------------------------------------------------------- | --------------------- |
