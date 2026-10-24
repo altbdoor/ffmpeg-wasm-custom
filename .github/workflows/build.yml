@@ -48,7 +48,7 @@ jobs:
         run: |
           # accessing `build-st` step directly to override extra cflags
           make build-st \
-            EXTRA_CFLAGS="-Oz -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1" \
+            EXTRA_CFLAGS="-Oz -msimd128 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1" \
             EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
 
       - run: |
