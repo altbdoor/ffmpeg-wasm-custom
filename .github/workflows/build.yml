@@ -27,7 +27,6 @@ jobs:
       - name: Override original build
         run: |
           cp --verbose override/src/Dockerfile Dockerfile
-          cp --verbose override/src/build/*.sh build/
 
       - name: Update pkg-config database
         run: sudo ldconfig
@@ -47,7 +46,10 @@ jobs:
 
       - name: Build FFmpeg
         run: |
-          make prd EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
+          # accessing `build-st` step directly to override extra cflags
+          make build-st \
+            EXTRA_CFLAGS="-Oz -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1" \
+            EXTRA_ARGS="--cache-from=type=local,src=build-cache-st --cache-to=type=local,dest=build-cache-st,mode=max"
 
       - run: |
           ls -lRh packages/core/dist/

@@ -160,6 +160,7 @@ COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
 FROM ffmpeg-base AS ffmpeg-builder
 COPY build/ffmpeg.sh /src/build.sh
 RUN bash -x /src/build.sh \
+      --enable-small \
       --disable-everything \
       --enable-gpl \
       --enable-libx264 \

@@ -36,9 +36,8 @@ For all filters, see:
 
 ## `emcc` flags
 
-| Flag                             | Purpose                                         |
-| -------------------------------- | ----------------------------------------------- |
-| `-Oz`                            | aggressive size optimization from emscripten    |
-| `-sASSERTIONS=0`                 | remove runtime assertions                       |
-| `-sDISABLE_EXCEPTION_CATCHING=1` | remove C++ exception handling overhead          |
-| `-sMALLOC=emmalloc`              | minimal malloc (~10 KB over dlmalloc, not used) |
+| Flag                             | Purpose                                      |
+| -------------------------------- | -------------------------------------------- |
+| `-Oz`                            | aggressive size optimization from emscripten |
+| `-sASSERTIONS=0`                 | remove runtime assertions                    |
+| `-sDISABLE_EXCEPTION_CATCHING=1` | remove C++ exception handling overhead       |
